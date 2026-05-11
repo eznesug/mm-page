@@ -1,0 +1,126 @@
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(120deg, #eef2f6, #dce4ec);
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== Welcome ===== */
+.welcome-box {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #1f2d3d;
+    color: white;
+}
+
+.welcome-box h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+/* ===============================
+   Enter Tool 按钮（欢迎页）
+   =============================== */
+
+.enter-btn {
+    display: inline-block;
+    padding: 22px 70px;          /* 👉 直接决定按钮大小 */
+    font-size: 24px;             /* 字体大 */
+    font-weight: 600;
+
+    color: #ffffff;
+    background: linear-gradient(
+        135deg,
+        #1f4e79,
+        #2c7fb8
+    );                            /* 科研风渐变蓝 */
+
+    border: none;
+    border-radius: 12px;         /* 圆角但不幼稚 */
+    text-decoration: none;
+
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+    transition: all 0.25s ease;
+}
+
+/* 鼠标悬停效果 */
+.enter-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(
+        135deg,
+        #163d5f,
+        #1f6fa6
+    );
+}
+/* ===== Main Container ===== */
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+label {
+    font-weight: 600;
+    margin-top: 12px;
+    display: block;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background: #2f6fad;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ===== Modal ===== */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+}
+
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 6px;
+    text-align: center;
+    width: 350px;
+}
+
+.close-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 20px;
+    background: #2f6fad;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>QSAR Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Radical Degradation Rate Prediction</h2>
+
+    <form method="post">
+
+        <label>SMILES</label>
+        <input type="text" name="smiles" required>
+
+        <label>Oxidant</label>
+        <select name="oxidant" required>
+            <option value="OH">·OH</option>
+            <option value="NO3">NO₃·</option>
+            <option value="O3">O₃</option>
+        </select>
+
+        <h3>Quantum Chemical Descriptors</h3>
+
+        <label>E(B3LPY)</label>
+        <input type="number" step="any" name="E(B3LPY)" required>
+
+        <label>μ</label>
+        <input type="number" step="any" name="μ" required>
+
+        <label>qH+</label>
+        <input type="number" step="any" name="qH+" required>
+
+        <label>q(CH+)n</label>
+        <input type="number" step="any" name="q(CH+)n" required>
+
+        <label>q(CH+)X</label>
+        <input type="number" step="any" name="q(CH+)X" required>
+
+        <label>q(C-)n</label>
+        <input type="number" step="any" name="q(C-)n" required>
+
+        <label>q(C-)X</label>
+        <input type="number" step="any" name="q(C-)X" required>
+
+        <label>ELUMO</label>
+        <input type="number" step="any" name="ELUMO" required>
+
+        <label>EHOMO</label>
+        <input type="number" step="any" name="EHOMO" required>
+
+        <label>EGAP</label>
+        <input type="number" step="any" name="EGAP" required>
+
+        <label>BOn</label>
+        <input type="number" step="any" name="BOn" required>
+
+        <label>BOX</label>
+        <input type="number" step="any" name="BOX" required>
+
+        <label>f(+)n</label>
+        <input type="number" step="any" name="f(+)n" required>
+
+        <label>f(+)X</label>
+        <input type="number" step="any" name="f(+)X" required>
+
+        <label>f(-)n</label>
+        <input type="number" step="any" name="f(-)n" required>
+
+        <label>f(-)X</label>
+        <input type="number" step="any" name="f(-)X" required>
+
+        <label>f(0)n</label>
+        <input type="number" step="any" name="f(0)n" required>
+
+        <label>f(0)X</label>
+        <input type="number" step="any" name="f(0)X" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+</div>
+
+{% if prediction is not none %}
+<div class="modal show">
+    <div class="modal-content">
+        <h3>Prediction Result</h3>
+        <p><strong>Predicted log k:</strong> {{ prediction }}</p>
+        <a href="/predict" class="close-btn">Close</a>
+    </div>
+</div>
+{% endif %}
+
+</body>
+</html>

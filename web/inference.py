@@ -1,5 +1,5 @@
 """
-Web 推理专用 — 从 paper_figures_final.py 剥离出的函数，
+Web 推理专用 -- 从 paper_figures_final.py 剥离出的函数，
 不含 matplotlib 依赖，仅用于 Flask 部署。
 """
 import json
@@ -9,11 +9,26 @@ from pathlib import Path
 import joblib
 import numpy as np
 
-# ── 常量 ─────────────────────────────────────────────
+# -- 兼容补丁: pickle 中部分对象引用了 _loss.loss / _loss.link
+#    （不带 sklearn. 前缀）, 需要在加载模型前让它们可导入
+from types import ModuleType
+import sklearn._loss.loss as _skl_loss_mod
+import sklearn._loss.link as _skl_link_mod
+
+_loss_pkg = ModuleType("_loss")
+_loss_pkg.loss = _skl_loss_mod
+_loss_pkg.link = _skl_link_mod
+_loss_pkg.__path__ = []
+sys.modules["_loss"] = _loss_pkg
+sys.modules["_loss.loss"] = _skl_loss_mod
+sys.modules["_loss.link"] = _skl_link_mod
+
+
+# -- 常量 ----------------------------------------------------
 OXIDANT_E0 = {"OH": 2.80, "O3": 2.07, "NO3": 2.40}
 
 
-# ── 模型名称推断 ─────────────────────────────────────
+# -- 模型名称推断 -------------------------------------------
 def _infer_model_name(model):
     from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
     from sklearn.linear_model import Ridge
@@ -30,7 +45,7 @@ def _infer_model_name(model):
     raise ValueError(f"Unsupported model type: {type(model)!r}")
 
 
-# ── 加载已有推理资产 ─────────────────────────────────
+# -- 加载已有推理资产 ---------------------------------------
 def load_web_inference_assets(model_dir=None):
     source_dir = Path(model_dir)
     model = joblib.load(source_dir / "unified_qsar_model.pkl")
@@ -63,7 +78,7 @@ def load_web_inference_assets(model_dir=None):
     }
 
 
-# ── 确保资产就绪（只读路径） ─────────────────────────
+# -- 确保资产就绪（只读路径）--------------------------------
 def ensure_web_inference_assets(model_dir=None):
     source_dir = Path(model_dir)
     required_files = [
@@ -85,7 +100,7 @@ def ensure_web_inference_assets(model_dir=None):
     return load_web_inference_assets(source_dir)
 
 
-# ── 共形预测推理 ─────────────────────────────────────
+# -- 共形预测推理 -------------------------------------------
 def predict_with_conformal_bundle(conformal_bundle, X_scaled):
     x_scaled = np.asarray(X_scaled, dtype=float)
     if x_scaled.ndim == 1:

@@ -1,0 +1,9 @@
+{
+  "model_name": "GBDT",
+  "feature_count": 19,
+  "beta": 1.0,
+  "interval_levels": [
+    90,
+    95
+  ]
+}

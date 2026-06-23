@@ -19,6 +19,9 @@ _loss_pkg = ModuleType("_loss")
 _loss_pkg.loss = _skl_loss_mod
 _loss_pkg.link = _skl_link_mod
 _loss_pkg.__path__ = []
+# 把 sklearn._loss.loss 和 .link 中的属性全部暴露到 _loss 顶层
+_loss_pkg.__dict__.update(vars(_skl_loss_mod))
+_loss_pkg.__dict__.update(vars(_skl_link_mod))
 sys.modules["_loss"] = _loss_pkg
 sys.modules["_loss.loss"] = _skl_loss_mod
 sys.modules["_loss.link"] = _skl_link_mod

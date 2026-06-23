@@ -1,15 +1,11 @@
 from pathlib import Path
-import sys
 
 import numpy as np
 from flask import Flask, render_template, request
 
 BASE_DIR = Path(__file__).resolve().parent
-PROJECT_ROOT = BASE_DIR.parent
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
 
-from paper_figures_final import (
+from inference import (
     OXIDANT_E0,
     ensure_web_inference_assets,
     predict_with_conformal_bundle,

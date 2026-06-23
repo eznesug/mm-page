@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSAR Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="welcome-page">
+    <main class="welcome-layout">
+        <section class="welcome-card">
+            <p class="eyebrow">QSAR + Conformal Prediction</p>
+            <h1>自由基降解速率常数在线预测平台</h1>
+            <p class="welcome-copy">
+                基于你在论文代码中训练得到的最优模型，网页端现在可以同时输出点预测结果和共形预测区间，便于展示预测值与不确定性。
+            </p>
+            <div class="welcome-tags">
+                <span>Unified QSAR model</span>
+                <span>Relative project paths</span>
+                <span>Adaptive conformal intervals</span>
+            </div>
+            <a href="{{ url_for('predict') }}" class="primary-btn">进入预测页面</a>
+        </section>
+    </main>
+</body>
+</html>
